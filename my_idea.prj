@@ -1,0 +1,51 @@
+; ************************************************************
+; PROJECT:
+; AUTHOR:
+; ************************************************************
+
+; Micro + software running
+; ------------------------------------------------------------
+.MICRO "ATmega16"
+.TOOLCHAIN "GCC"
+.GCCPATH   "C:\Program Files\WinAVR-20100110"
+.GCCMAKE   AUTO
+.TARGET    "my_idea.hex"
+.SOURCE    "my_idea.c"
+
+.TRACE              ; Activate micro trace
+
+; Following lines are optional; if not included
+; exactly these values are taken by default
+; ------------------------------------------------------------
+.POWER VDD=5 VSS=0  ; Power nodes
+.CLOCK 8meg         ; Micro clock
+.STORE 2000m         ; Trace (micro+signals) storage time
+
+; Micro nodes: RESET, AREF, PA0-PA7, PB0-PB7, PC0-PC7, PD0-PD7, ACO, TIM1OVF
+; Define here the hardware around the micro
+; ------------------------------------------------------------
+
+
+; X2  KEY4x4 PD0 PD1 PD2 PD3 PD4 PD5 PD5 PD6
+
+
+;D1 VDD N1
+;RD1 N1 PA0 680
+
+;D3 VDD N3
+;RD3 N3 PA2 680
+
+;K0 PD2 GND ; PD2 = INT0
+;RK0 PD2 VDD 10k
+
+;K2 PB2 GND ; PB2 = INT2
+;RK2 PB2 VDD 10k
+
+XLCD LCD(16 2 250k) pd0 gnd pd1 pd5 pd4 pd3 pd2 gnd gnd gnd gnd
+
+
+.PLOT V(PA0) V(PD2) V(PA2) V(PB2) V(PD0)
+
+
+
+
